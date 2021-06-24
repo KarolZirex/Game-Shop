@@ -1,0 +1,43 @@
+<div class="container mt-5">
+  <div class="row mt-5">
+
+    <section class="col-3 mt-3">
+      <h5 class="text-warning ml-3 mt-3 mb-3">Sortuj:</h5>
+      <select class="custom-select mb-3" (change)="onSortSelected($any($event.target).value)">
+        <option *ngFor="let sort of sortOption" [value]="sort.value">
+          {{sort.name}}
+        </option>
+      </select>
+
+      <h5 class="text-warning ml-3">Gatunki</h5>
+      <ul class="list-group mb-3">
+        <li class="list-group-item" *ngFor="let genre of genres" [class.active]="genre.name === this.genreNameSelected"
+          [value]="genre.id" (click)="onGenreSelected(genre.name)">
+          {{ genre.name }}
+        </li>
+      </ul>
+    </section>
+
+    <section class="col-9 mt-5">
+      <div class="d-flex justify-content-between align-items-center pb-2">
+        <header>
+          <span>Wyświetla <strong>{{ itemsFrom }}-{{itemsTo}}</strong>  z <strong>{{ totalCount }}</strong> znalezionych produktów</span>
+        </header>
+        <form>
+        <div class="form-inline mt-2">
+          <input class="form-control" style="width: 300px;" placeholder="Wyszukaj" type="text">
+          <button type="submit" class="btn btn-outline-primary my-2 ml-2" (click)="onSearchPhraseModyfied(searchPhrase)">Wyszukaj</button>
+          <button type="reset" class="btn btn-outline-success my-2 ml-2">Reset</button>
+        </div>
+      </form>
+      </div>
+
+      <div class="row">
+        <div class="col-4 mb-4" *ngFor="let product of products">
+          <app-product-item [product]="product"></app-product-item>
+        </div>
+      </div>
+
+    </section>
+  </div>
+</div>
